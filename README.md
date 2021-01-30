@@ -9,7 +9,6 @@ In a nutshell, the program should work as follows:
  3. Quit
 
 ## Command
-Command 		Description
 #### `C w h`           
 Should create a new canvas of width w and height h.
 #### `L x1 y1 x2 y2`   
