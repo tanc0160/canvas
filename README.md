@@ -21,3 +21,5 @@ Should fill the entire area connected to (x,y) with "colour" c. The behavior of 
 Should quit the program.
 
 ## How to run the program
+#### `mvn clean package`
+#### `java -cp target/canvas-1.0-SNAPSHOT.jar com.tanc0160.canvas.Main`
