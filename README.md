@@ -24,6 +24,10 @@ Should quit the program.
 It is not allowed to have double action on single coordinate on the Canvas.
 If the coordinate has been filled with some value, any action that try to fill coordinate will fail
 
+
+## Prerequisite
+Java JDK and Maven installed in your system
+
 ## How to run the program
 #### `mvn clean package`
 #### `java -cp target/canvas-1.0-SNAPSHOT.jar com.tanc0160.canvas.Main`
