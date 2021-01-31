@@ -13,10 +13,22 @@ public class Canvas {
 
     public Canvas(final int width,
                   final int height) {
+        validateWidth(width);
+        validateHeight(height);
         map = new Character[height + 2][width + 2];
         this.width = width;
         this.height = height;
         initBorderOfMap();
+    }
+
+    private void validateWidth(final int width) {
+        if (width <= 0)
+            throw new IllegalArgumentException("Width must be greater than zero");
+    }
+
+    private void validateHeight(final int height) {
+        if (height <= 0)
+            throw new IllegalArgumentException("Height must be greater than zero");
     }
 
     public int getHeight() {
@@ -41,6 +53,11 @@ public class Canvas {
                      final int y,
                      final Character value) {
         map[y][x] = value;
+    }
+
+    private boolean hasValue(final int x,
+                             final int y) {
+        return map[y][x] != null;
     }
 
     private void initBorderOfMap() {
@@ -129,16 +146,16 @@ public class Canvas {
             int x = currentPoint.getX();
             set(x, y, color);
 
-            if (y - 1 > 0 && get(x, y - 1) == null) {
+            if (y - 1 > 0 && !hasValue(x, y - 1)) {
                 stack.push(new Point(x, y - 1));
             }
-            if (y + 1 <= height && get(x, y + 1) == null) {
+            if (y + 1 <= height && !hasValue(x, y + 1)) {
                 stack.push(new Point(x, y + 1));
             }
-            if (x - 1 > 0 && get(x -1, y) == null) {
+            if (x - 1 > 0 && !hasValue(x - 1, y)) {
                 stack.push(new Point(x - 1, y));
             }
-            if (x + 1 <= width && get(x + 1, y) == null) {
+            if (x + 1 <= width && !hasValue(x + 1, y)) {
                 stack.push(new Point(x + 1, y));
             }
         }
@@ -155,7 +172,7 @@ public class Canvas {
 
     private void validateIsPointFilled(final int x,
                                        final int y) {
-        if (get(x, y) != null)
+        if (hasValue(x, y))
             throw new IllegalArgumentException("Point (" + x + "," + y + ") " +
                     "has been filled before");
     }

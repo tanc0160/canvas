@@ -84,7 +84,6 @@ public class TestCase {
                 "|oooooooooooooooooooo|\n" +
                 "|oooooooooooooooooooo|\n" +
                 "----------------------\n";
-        System.out.print(output.getOutput());
         assertTrue(output.getOutput().equals(expected));
     }
 
@@ -104,6 +103,28 @@ public class TestCase {
                 "|     xoooooooxxxxxoo|\n" +
                 "|     xoooooooooooooo|\n" +
                 "----------------------\n";
+        assertTrue(output.getOutput().equals(expected));
+    }
+
+    @Test
+    public void sample2() {
+        final Canvas canvas = new Canvas(50, 4);
+        canvas.drawLine(new Point(2, 2), new Point(6, 2));
+        canvas.drawLine(new Point(19, 1), new Point(19, 4));
+        canvas.drawRectangle(new Point(10, 1), new Point(18, 3));
+        canvas.drawRectangle(new Point(1, 3), new Point(3, 4));
+        canvas.drawRectangle(new Point(21, 1), new Point(30, 4));
+        canvas.fill(new Point(7, 1), 't');
+        canvas.fill(new Point(49, 1), 'z');
+        final StringMemory output = new StringMemory();
+        canvas.print(output);
+        String expected =
+                "----------------------------------------------------\n" +
+                "|tttttttttxxxxxxxxxx xxxxxxxxxxzzzzzzzzzzzzzzzzzzzz|\n" +
+                "|txxxxxtttx       xx x        xzzzzzzzzzzzzzzzzzzzz|\n" +
+                "|xxxttttttxxxxxxxxxx x        xzzzzzzzzzzzzzzzzzzzz|\n" +
+                "|xxxtttttttttttttttx xxxxxxxxxxzzzzzzzzzzzzzzzzzzzz|\n" +
+                "----------------------------------------------------\n";
         assertTrue(output.getOutput().equals(expected));
     }
 

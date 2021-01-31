@@ -23,3 +23,7 @@ Should quit the program.
 ## How to run the program
 #### `mvn clean package`
 #### `java -cp target/canvas-1.0-SNAPSHOT.jar com.tanc0160.canvas.Main`
+
+
+## How to run unit tests and test cases
+#### `mvn test`

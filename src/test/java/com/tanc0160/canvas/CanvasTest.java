@@ -1,6 +1,7 @@
 package com.tanc0160.canvas;
 
 import com.tanc0160.canvas.model.Point;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class CanvasTest {
@@ -12,6 +13,37 @@ public class CanvasTest {
         final Canvas canvas = new Canvas(width, height);
         assert (canvas.getHeight() == height);
         assert (canvas.getWidth() == width);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void validateWidthLessThanOne() {
+        final int height = 4;
+        final int width = 0;
+        new Canvas(width, height);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void validateHeightLessThanOne() {
+        final int height = 0;
+        final int width = 4;
+        new Canvas(width, height);
+    }
+
+    @Test
+    public void validateGet() {
+        final int height = 4;
+        final int width = 20;
+        final Canvas canvas = new Canvas(width, height);
+        Assert.assertNull(canvas.get(new Point(1, 1)));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void validateDoubleFillingOnSameCoordinate() {
+        final int height = 4;
+        final int width = 20;
+        final Canvas canvas = new Canvas(width, height);
+        canvas.drawLine(new Point(1, 1), new Point(1, 2));
+        canvas.drawLine(new Point(1, 1), new Point(3, 1));
     }
 
     @Test(expected = IllegalArgumentException.class)
