@@ -77,7 +77,7 @@ public class CanvasServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void drawNorHorizontalOrVerticalLine() {
+    public void drawNeitherHorizontalNOrVerticalLine() {
         final int height = 4;
         final int width = 20;
         final CanvasService canvasService = new CanvasServiceImpl();
@@ -169,6 +169,15 @@ public class CanvasServiceTest {
             assert (canvasService.get(new Point(14, y)) != null && canvasService.get(new Point(14, y)) == 'x');
             assert (canvasService.get(new Point(18, y)) != null && canvasService.get(new Point(18, y)) == 'x');
         }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void fillWithInvalidCoordinate() {
+        final int height = 4;
+        final int width = 20;
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.create(width, height);
+        canvasService.fill(new Point(21, 1), 't');
     }
 
     @Test
