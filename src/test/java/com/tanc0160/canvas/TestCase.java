@@ -2,6 +2,8 @@ package com.tanc0160.canvas;
 
 import com.tanc0160.canvas.model.Point;
 import com.tanc0160.canvas.output.StringMemory;
+import com.tanc0160.canvas.service.CanvasService;
+import com.tanc0160.canvas.service.CanvasServiceImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -10,9 +12,10 @@ public class TestCase {
 
     @Test
     public void create() {
-        final Canvas canvas = new Canvas(20, 4);
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.create(20, 4);
         final StringMemory output = new StringMemory();
-        canvas.print(output);
+        canvasService.print(output);
         String expected =
                 "----------------------\n" +
                 "|                    |\n" +
@@ -25,10 +28,11 @@ public class TestCase {
 
     @Test
     public void drawHorizontalLine() {
-        final Canvas canvas = new Canvas(20, 4);
-        canvas.drawLine(new Point(1, 2), new Point(6, 2));
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.create(20, 4);
+        canvasService.drawLine(new Point(1, 2), new Point(6, 2));
         final StringMemory output = new StringMemory();
-        canvas.print(output);
+        canvasService.print(output);
         String expected =
                 "----------------------\n" +
                 "|                    |\n" +
@@ -41,10 +45,11 @@ public class TestCase {
 
     @Test
     public void drawVerticalLine() {
-        final Canvas canvas = new Canvas(20, 4);
-        canvas.drawLine(new Point(6, 2), new Point(6, 4));
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.create(20, 4);
+        canvasService.drawLine(new Point(6, 2), new Point(6, 4));
         final StringMemory output = new StringMemory();
-        canvas.print(output);
+        canvasService.print(output);
         String expected =
                 "----------------------\n" +
                 "|                    |\n" +
@@ -57,10 +62,11 @@ public class TestCase {
 
     @Test
     public void drawRectangle() {
-        final Canvas canvas = new Canvas(20, 4);
-        canvas.drawRectangle(new Point(14, 1), new Point(18, 3));
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.create(20, 4);
+        canvasService.drawRectangle(new Point(14, 1), new Point(18, 3));
         final StringMemory output = new StringMemory();
-        canvas.print(output);
+        canvasService.print(output);
         String expected =
                 "----------------------\n" +
                 "|             xxxxx  |\n" +
@@ -73,10 +79,11 @@ public class TestCase {
 
     @Test
     public void fill() {
-        final Canvas canvas = new Canvas(20, 4);
-        canvas.fill(new Point(14, 1), 'o');
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.create(20, 4);
+        canvasService.fill(new Point(14, 1), 'o');
         final StringMemory output = new StringMemory();
-        canvas.print(output);
+        canvasService.print(output);
         String expected =
                 "----------------------\n" +
                 "|oooooooooooooooooooo|\n" +
@@ -89,13 +96,14 @@ public class TestCase {
 
     @Test
     public void sample() {
-        final Canvas canvas = new Canvas(20, 4);
-        canvas.drawLine(new Point(1, 2), new Point(6, 2));
-        canvas.drawLine(new Point(6, 3), new Point(6, 4));
-        canvas.drawRectangle(new Point(14, 1), new Point(18, 3));
-        canvas.fill(new Point(10, 3), 'o');
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.create(20, 4);
+        canvasService.drawLine(new Point(1, 2), new Point(6, 2));
+        canvasService.drawLine(new Point(6, 3), new Point(6, 4));
+        canvasService.drawRectangle(new Point(14, 1), new Point(18, 3));
+        canvasService.fill(new Point(10, 3), 'o');
         final StringMemory output = new StringMemory();
-        canvas.print(output);
+        canvasService.print(output);
         String expected =
                 "----------------------\n" +
                 "|oooooooooooooxxxxxoo|\n" +
@@ -108,16 +116,17 @@ public class TestCase {
 
     @Test
     public void sample2() {
-        final Canvas canvas = new Canvas(50, 4);
-        canvas.drawLine(new Point(2, 2), new Point(6, 2));
-        canvas.drawLine(new Point(19, 1), new Point(19, 4));
-        canvas.drawRectangle(new Point(10, 1), new Point(18, 3));
-        canvas.drawRectangle(new Point(1, 3), new Point(3, 4));
-        canvas.drawRectangle(new Point(21, 1), new Point(30, 4));
-        canvas.fill(new Point(7, 1), 't');
-        canvas.fill(new Point(49, 1), 'z');
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.create(50, 4);
+        canvasService.drawLine(new Point(2, 2), new Point(6, 2));
+        canvasService.drawLine(new Point(19, 1), new Point(19, 4));
+        canvasService.drawRectangle(new Point(10, 1), new Point(18, 3));
+        canvasService.drawRectangle(new Point(1, 3), new Point(3, 4));
+        canvasService.drawRectangle(new Point(21, 1), new Point(30, 4));
+        canvasService.fill(new Point(7, 1), 't');
+        canvasService.fill(new Point(49, 1), 'z');
         final StringMemory output = new StringMemory();
-        canvas.print(output);
+        canvasService.print(output);
         String expected =
                 "----------------------------------------------------\n" +
                 "|tttttttttxxxxxxxxxx xxxxxxxxxxzzzzzzzzzzzzzzzzzzzz|\n" +
