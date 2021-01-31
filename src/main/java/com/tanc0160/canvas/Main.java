@@ -20,50 +20,54 @@ public class Main {
             System.out.print("enter command: ");
             input = sc.nextLine();
             if (input.length() > 0) {
-                String[] list = input.split(" ");
-                switch (list[0].charAt(0)) {
-                    case 'C':
-                        if (isInputSizeCorrect(list, 3)) {
-                            canvasService.create(
-                                    Integer.parseInt(list[1]),
-                                    Integer.parseInt(list[2])
-                            );
-                            canvasService.print(output);
-                        } else {
-                            System.out.println("Wrong input command size");
-                        }
-                        break;
-                    case 'B':
-                        if (isInputSizeCorrect(list, 4)) {
-                            canvasService.fill(new Point(list[1], list[2]), list[3].charAt(0));
-                            canvasService.print(output);
-                        } else
-                            System.out.println("Wrong input command size");
-                        break;
-                    case 'R':
-                        if (isInputSizeCorrect(list, 5)) {
-                            canvasService.drawRectangle(
-                                    new Point(list[1], list[2]),
-                                    new Point(list[3], list[4])
-                            );
-                            canvasService.print(output);
-                        } else
-                            System.out.println("Wrong input command size");
-                        break;
-                    case 'L':
-                        if (isInputSizeCorrect(list, 5)) {
-                            canvasService.drawLine(
-                                    new Point(list[1], list[2]),
-                                    new Point(list[3], list[4])
-                            );
-                            canvasService.print(output);
-                        } else
-                            System.out.println("Wrong input command size");
-                        break;
-                    case 'Q':
-                        break;
-                    default:
-                        System.out.println("Wrong input");
+                try {
+                    String[] list = input.split(" ");
+                    switch (list[0].charAt(0)) {
+                        case 'C':
+                            if (isInputSizeCorrect(list, 3)) {
+                                canvasService.create(
+                                        Integer.parseInt(list[1]),
+                                        Integer.parseInt(list[2])
+                                );
+                                canvasService.print(output);
+                            } else {
+                                System.out.println("Wrong input command size");
+                            }
+                            break;
+                        case 'B':
+                            if (isInputSizeCorrect(list, 4)) {
+                                canvasService.fill(new Point(list[1], list[2]), list[3].charAt(0));
+                                canvasService.print(output);
+                            } else
+                                System.out.println("Wrong input command size");
+                            break;
+                        case 'R':
+                            if (isInputSizeCorrect(list, 5)) {
+                                canvasService.drawRectangle(
+                                        new Point(list[1], list[2]),
+                                        new Point(list[3], list[4])
+                                );
+                                canvasService.print(output);
+                            } else
+                                System.out.println("Wrong input command size");
+                            break;
+                        case 'L':
+                            if (isInputSizeCorrect(list, 5)) {
+                                canvasService.drawLine(
+                                        new Point(list[1], list[2]),
+                                        new Point(list[3], list[4])
+                                );
+                                canvasService.print(output);
+                            } else
+                                System.out.println("Wrong input command size");
+                            break;
+                        case 'Q':
+                            break;
+                        default:
+                            System.out.println("Wrong input");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getLocalizedMessage());
                 }
             }
         }
