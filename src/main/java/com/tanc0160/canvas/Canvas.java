@@ -1,7 +1,7 @@
 package com.tanc0160.canvas;
 
 import com.tanc0160.canvas.model.Point;
-import com.tanc0160.canvas.output.Drawable;
+import com.tanc0160.canvas.output.Outputable;
 
 import java.util.Stack;
 
@@ -19,18 +19,38 @@ public class Canvas {
         initBorderOfMap();
     }
 
-    Character[][] getMap() {
-        return map;
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Character get(final Point point) {
+        validateXAndYCoordinate(point);
+        return get(point.getX(), point.getY());
+    }
+
+    private Character get(final int x,
+                          final int y) {
+        return map[y][x];
+    }
+
+    private void set(final int x,
+                     final int y,
+                     final Character value) {
+        map[y][x] = value;
     }
 
     private void initBorderOfMap() {
-        for (int col = 0; col < map[0].length; col++) {
-            map[0][col] = '-';
-            map[map.length - 1][col] = '-';
+        for (int x = 0; x < map[0].length; x++) {
+            set(x, 0, '-');
+            set(x, map.length - 1, '-');
         }
-        for (int row = 1; row < map.length - 1; row++) {
-            map[row][0] = '|';
-            map[row][map[row].length - 1] = '|';
+        for (int y = 1; y < map.length - 1; y++) {
+            set(0, y, '|');
+            set(map[y].length - 1, y, '|');
         }
     }
 
@@ -47,7 +67,7 @@ public class Canvas {
                 validateIsPointFilled(point1.getX(), y);
             }
             for (int y = fromY; y <= toY; y++) {
-                map[y][point1.getX()] = 'x';
+                set(point1.getX(), y, 'x');
             }
         } else {
             final int fromX = point1.getX() > point2.getX() ? point2.getX() : point1.getX();
@@ -56,7 +76,7 @@ public class Canvas {
                 validateIsPointFilled(x, point1.getY());
             }
             for (int x = fromX; x <= toX; x++) {
-                map[point1.getY()][x] = 'x';
+                set(x, point1.getY(), 'x');
             }
         }
     }
@@ -88,13 +108,13 @@ public class Canvas {
         }
 
         for (int x = point1.getX(); x <= point2.getX(); x++) {
-            map[point1.getY()][x] = 'x';
-            map[point2.getY()][x] = 'x';
+            set(x, point1.getY(), 'x');
+            set(x, point2.getY(), 'x');
         }
 
         for (int y = point1.getY() + 1; y < point2.getY(); y++) {
-            map[y][point1.getX()] = 'x';
-            map[y][point2.getX()] = 'x';
+            set(point1.getX(), y, 'x');
+            set(point2.getX(), y, 'x');
         }
     }
 
@@ -107,18 +127,18 @@ public class Canvas {
             final Point currentPoint = stack.pop();
             int y = currentPoint.getY();
             int x = currentPoint.getX();
-            map[y][x] = color;
+            set(x, y, color);
 
-            if (y - 1 > 0 && map[y - 1][x] == null) {
+            if (y - 1 > 0 && get(x, y - 1) == null) {
                 stack.push(new Point(x, y - 1));
             }
-            if (y + 1 <= height && map[y + 1][x] == null) {
+            if (y + 1 <= height && get(x, y + 1) == null) {
                 stack.push(new Point(x, y + 1));
             }
-            if (x - 1 > 0 && map[y][x - 1] == null) {
+            if (x - 1 > 0 && get(x -1, y) == null) {
                 stack.push(new Point(x - 1, y));
             }
-            if (x + 1 <= width && map[y][x + 1] == null) {
+            if (x + 1 <= width && get(x + 1, y) == null) {
                 stack.push(new Point(x + 1, y));
             }
         }
@@ -135,12 +155,12 @@ public class Canvas {
 
     private void validateIsPointFilled(final int x,
                                        final int y) {
-        if (map[y][x] != null)
+        if (get(x, y) != null)
             throw new IllegalArgumentException("Point (" + x + "," + y + ") " +
                     "has been filled before");
     }
 
-    public void print(final Drawable drawable) {
+    public void print(final Outputable outputable) {
         final StringBuilder builder = new StringBuilder();
         for (Character[] aMap : map) {
             for (Character anAMap : aMap) {
@@ -151,6 +171,6 @@ public class Canvas {
             }
             builder.append("\n");
         }
-        drawable.output(builder.toString());
+        outputable.output(builder.toString());
     }
 }

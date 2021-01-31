@@ -2,7 +2,7 @@ package com.tanc0160.canvas;
 
 import com.tanc0160.canvas.model.Point;
 import com.tanc0160.canvas.output.ConsoleOutput;
-import com.tanc0160.canvas.output.Drawable;
+import com.tanc0160.canvas.output.Outputable;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String input = "";
         Canvas canvas = null;
-        final Drawable output = new ConsoleOutput();
+        final Outputable output = new ConsoleOutput();
         while (!input.equals("Q")) {
             System.out.print("enter command: ");
             input = sc.nextLine();

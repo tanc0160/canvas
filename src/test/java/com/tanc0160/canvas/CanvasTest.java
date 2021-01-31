@@ -6,13 +6,12 @@ import org.junit.Test;
 public class CanvasTest {
 
     @Test
-    public void validateInternalMapSize() {
+    public void validateMapSize() {
         final int height = 4;
         final int width = 20;
         final Canvas canvas = new Canvas(width, height);
-        final Character[][] result = canvas.getMap();
-        assert (result.length == height + 2);
-        assert (result[0].length == width + 2);
+        assert (canvas.getHeight() == height);
+        assert (canvas.getWidth() == width);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -29,9 +28,9 @@ public class CanvasTest {
         final int width = 20;
         final Canvas canvas = new Canvas(width, height);
         canvas.drawLine(new Point(1, 2), new Point(6, 2));
-        final Character[][] result = canvas.getMap();
         for (int x = 1; x <= 6; x++)
-            assert (result[2][x] != null && result[2][x] == 'x');
+            assert (canvas.get(new Point(x, 2)) != null &&
+                    canvas.get(new Point(x, 2)) == 'x');
     }
 
     @Test
@@ -40,9 +39,9 @@ public class CanvasTest {
         final int width = 20;
         final Canvas canvas = new Canvas(width, height);
         canvas.drawLine(new Point(6, 3), new Point(6, 4));
-        final Character[][] result = canvas.getMap();
         for (int y = 3; y <= 4; y++)
-            assert (result[y][6] != null && result[y][6] == 'x');
+            assert (canvas.get(new Point(6, y)) != null &&
+                    canvas.get(new Point(6, y)) == 'x');
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -91,14 +90,13 @@ public class CanvasTest {
         final int width = 20;
         final Canvas canvas = new Canvas(width, height);
         canvas.drawRectangle(new Point(14, 1), new Point(18, 3));
-        final Character[][] result = canvas.getMap();
         for (int x = 14; x <= 18; x++) {
-            assert (result[1][x] != null && result[1][x] == 'x');
-            assert (result[3][x] != null && result[3][x] == 'x');
+            assert (canvas.get(new Point(x, 1)) != null && canvas.get(new Point(x, 1)) == 'x');
+            assert (canvas.get(new Point(x, 3)) != null && canvas.get(new Point(x, 3)) == 'x');
         }
         for (int y = 1; y <= 3; y++) {
-            assert (result[y][14] != null && result[y][14] == 'x');
-            assert (result[y][18] != null && result[y][18] == 'x');
+            assert (canvas.get(new Point(14, y)) != null && canvas.get(new Point(14, y)) == 'x');
+            assert (canvas.get(new Point(18, y)) != null && canvas.get(new Point(18, y)) == 'x');
         }
     }
 
@@ -108,10 +106,9 @@ public class CanvasTest {
         final int width = 20;
         final Canvas canvas = new Canvas(width, height);
         canvas.fill(new Point(1, 1), 't');
-        final Character[][] result = canvas.getMap();
         for (int x = 1; x <= width; x++) {
             for (int y = 1; y <= height; y++) {
-                assert (result[y][x] != null && result[y][x] == 't');
+                assert (canvas.get(new Point(x, y)) != null && canvas.get(new Point(x, y)) == 't');
             }
         }
     }

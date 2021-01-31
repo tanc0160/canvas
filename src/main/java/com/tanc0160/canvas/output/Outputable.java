@@ -1,5 +1,5 @@
 package com.tanc0160.canvas.output;
 
-public interface Drawable {
+public interface Outputable {
     public void output(final String result);
 }
