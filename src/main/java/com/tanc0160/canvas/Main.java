@@ -1,12 +1,14 @@
 package com.tanc0160.canvas;
 
 import com.tanc0160.canvas.model.Point;
-import com.tanc0160.canvas.output.ConsoleOutput;
+import com.tanc0160.canvas.output.OutputFactory;
 import com.tanc0160.canvas.output.Outputable;
 import com.tanc0160.canvas.service.CanvasService;
 import com.tanc0160.canvas.service.CanvasServiceImpl;
 
 import java.util.Scanner;
+
+import static com.tanc0160.canvas.output.OutputFactory.OutputType.CONSOLE;
 
 
 public class Main {
@@ -15,7 +17,7 @@ public class Main {
         final Scanner sc = new Scanner(System.in);
         String input = "";
         final CanvasService canvasService = new CanvasServiceImpl();
-        final Outputable output = new ConsoleOutput();
+        final Outputable output = OutputFactory.getOutput(CONSOLE);
         while (!input.equals("Q")) {
             System.out.print("enter command: ");
             input = sc.nextLine();
