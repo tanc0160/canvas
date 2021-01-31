@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        final Scanner sc = new Scanner(System.in);
         String input = "";
         final CanvasService canvasService = new CanvasServiceImpl();
         final Outputable output = new ConsoleOutput();

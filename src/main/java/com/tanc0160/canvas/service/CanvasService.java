@@ -4,8 +4,7 @@ import com.tanc0160.canvas.model.Point;
 import com.tanc0160.canvas.output.Outputable;
 
 public interface CanvasService {
-    void create(final int width,
-                       final int height);
+    void create(final int width, final int height);
 
     int getHeight();
 

@@ -20,10 +20,13 @@ Should fill the entire area connected to (x,y) with "colour" c. The behavior of 
 #### `Q`               
 Should quit the program.
 
+## Assumption
+It is not allowed to have double action on single coordinate on the Canvas.
+If the coordinate has been filled with some value, any action that try to fill coordinate will fail
+
 ## How to run the program
 #### `mvn clean package`
 #### `java -cp target/canvas-1.0-SNAPSHOT.jar com.tanc0160.canvas.Main`
-
 
 ## How to run unit tests and test cases
 #### `mvn test`

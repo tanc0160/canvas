@@ -1,8 +1,7 @@
 package com.tanc0160.canvas.service;
 
 import com.tanc0160.canvas.model.Point;
-import com.tanc0160.canvas.service.CanvasService;
-import com.tanc0160.canvas.service.CanvasServiceImpl;
+import com.tanc0160.canvas.output.ConsoleOutput;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,6 +15,30 @@ public class CanvasServiceTest {
         canvasService.create(width, height);
         assert (canvasService.getHeight() == height);
         assert (canvasService.getWidth() == width);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void printBeforeCanvasIsCreated() {
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.print(new ConsoleOutput());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void drawLineBeforeCanvasIsCreated() {
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.drawLine(new Point(1, 2), new Point(2, 2));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void drawRectangleBeforeCanvasIsCreated() {
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.drawRectangle(new Point(1, 2), new Point(2, 4));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void fillBeforeCanvasIsCreated() {
+        final CanvasService canvasService = new CanvasServiceImpl();
+        canvasService.fill(new Point(1, 2), 'a');
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -174,6 +174,7 @@ public class CanvasServiceImpl implements CanvasService {
     }
 
     public void print(final Outputable outputable) {
+        validateCanvasHasBeenCreated();
         outputable.output(canvas.toString());
     }
 }

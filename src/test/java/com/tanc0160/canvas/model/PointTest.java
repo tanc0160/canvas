@@ -1,4 +1,4 @@
-package com.tanc0160.canvas.com.tanc0160.model;
+package com.tanc0160.canvas.model;
 
 import com.tanc0160.canvas.model.Point;
 import org.junit.Test;
